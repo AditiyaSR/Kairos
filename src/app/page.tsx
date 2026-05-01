@@ -9,7 +9,6 @@ import {
   ChevronDown,
   Menu,
   X,
-  Settings,
   Timer,
   Users,
   Filter,
@@ -38,7 +37,6 @@ import {
   Linkedin,
   Instagram,
 } from 'lucide-react';
-import AdminPanel from '@/components/admin-panel';
 
 /* ─── Types ─────────────────────────────────────────────────── */
 interface Testimonial {
@@ -297,17 +295,6 @@ function Navbar({ onOpenAdmin }: { onOpenAdmin?: () => void }) {
 
           {/* Desktop Right Side */}
           <div className="flex items-center gap-3">
-            {/* Admin Gear */}
-            {onOpenAdmin && (
-              <button
-                onClick={onOpenAdmin}
-                className="hidden sm:flex p-2 text-gray-600 hover:text-emerald-400 transition-colors"
-                aria-label="Admin settings"
-              >
-                <Settings className="w-4 h-4" />
-              </button>
-            )}
-
             {/* Desktop CTA */}
             <a
               href="#audit"
@@ -348,18 +335,6 @@ function Navbar({ onOpenAdmin }: { onOpenAdmin?: () => void }) {
                 {link.label}
               </a>
             ))}
-            {onOpenAdmin && (
-              <button
-                onClick={() => {
-                  setMobileOpen(false);
-                  onOpenAdmin();
-                }}
-                className="flex items-center gap-2 px-4 py-3 rounded-lg text-gray-500 hover:text-emerald-400 hover:bg-emerald-500/5 transition-all font-medium w-full"
-              >
-                <Settings className="w-4 h-4" />
-                Admin
-              </button>
-            )}
             <a
               href="#audit"
               onClick={() => setMobileOpen(false)}
@@ -1532,24 +1507,8 @@ function LandingPage({ onOpenAdmin }: { onOpenAdmin?: () => void }) {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   MAIN: Home Component (with Admin Panel)
+   MAIN: Home Component
    ═══════════════════════════════════════════════════════════════ */
 export default function Home() {
-  const [adminOpen, setAdminOpen] = useState(false);
-
-  return (
-    <>
-      <LandingPage onOpenAdmin={() => setAdminOpen(true)} />
-      {!adminOpen && (
-        <button
-          onClick={() => setAdminOpen(true)}
-          className="fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 hover:bg-emerald-500/20 hover:border-emerald-500/50 transition-all hover:shadow-[0_0_20px_rgba(16,185,129,0.2)] active:scale-95"
-          aria-label="Open Admin Panel"
-        >
-          <Settings className="w-5 h-5" />
-        </button>
-      )}
-      <AdminPanel isOpen={adminOpen} onClose={() => setAdminOpen(false)} />
-    </>
-  );
+  return <LandingPage onOpenAdmin={() => {}} />;
 }
